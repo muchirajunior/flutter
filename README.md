@@ -4,4 +4,4 @@ DEVELOPING FLUTTER APPS
 
 for mobile app development
 
-https://www.ukraineitnow.com/wp-content/uploads/2019/10/flutter_banner.jpg
+<img src="https://www.ukraineitnow.com/wp-content/uploads/2019/10/flutter_banner.jpg"/>

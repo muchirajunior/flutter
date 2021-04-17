@@ -27,7 +27,7 @@ class _QuotesAppState extends State<QuotesApp> {
     List<Quote> quotes=[
     Quote(text:"out of an eater came something to eat",author:"samson"),
     Quote(text:"out of strength came something sweet",author:"SAMSON"),
-    Quote(text:"comments is a sweet letter to code future",author:"Junior")  
+    Quote(text:"comments is a sweet letter to code future",author:"Muchira Junior")  
   ];
 
 
@@ -40,7 +40,15 @@ class _QuotesAppState extends State<QuotesApp> {
        ),
 
        body: Column(
-         children: quotes.map((q)=>QuotesCard(quote:q)).toList(),
+         children: quotes.map((q)=>QuotesCard(
+           quote:q,
+           
+           delete:(){
+             setState(() {
+               quotes.remove(q);
+             });
+           }
+           )).toList(),
        ),
     );
   }

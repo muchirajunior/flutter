@@ -5,6 +5,7 @@ import 'package:world_time/pages/location.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     initialRoute: "/",
     routes:{
       '/': (context) => Loading(),

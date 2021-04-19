@@ -67,8 +67,10 @@ class _LocationState extends State<Location> {
         ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Text("More"),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text("Home"),
       ),
     );
   }

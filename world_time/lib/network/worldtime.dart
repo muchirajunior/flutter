@@ -7,18 +7,21 @@ class WorldTime{
   var realtime;
   var url;
   var flag;
+  bool daytime;
 
   WorldTime({this.location,this.flag,this.url});
 
   Future<void> getTime() async {
     try{
-    Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
+    var response = await get(Uri.parse('https://worldtimeapi.org/api/timezone/$url'));
      Map data=jsonDecode(response.body);
      var datetime=data['utc_datetime'];
      var offset=data['utc_offset'].substring(1,3);
 
      DateTime time=DateTime.parse(datetime);
      time=time.add(Duration(hours:int.parse(offset)));
+     
+     daytime= time.hour >6 && time.hour<19 ? true : false;
     
      realtime=DateFormat.jm().format(time);
      

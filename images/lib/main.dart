@@ -37,7 +37,7 @@ class Home extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
                 imageUrl: "https://innovationclub.buzz/img/afya.jpg",
-                placeholder: (context, url) =>  Container(child: Center(child: CircularProgressIndicator())),
+                placeholder: (context, url) =>  Container(padding:EdgeInsets.all(10) , child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
                 imageUrl: "https://innovationclub.buzz/img/doctor.jpg",
-                placeholder: (context, url) =>  Container(child: Center(child: CircularProgressIndicator())),
+                placeholder: (context, url) =>  Container( padding:EdgeInsets.all(10), child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "912989487916",
+    "project_id": "arcane-woods-298111",
+    "storage_bucket": "arcane-woods-298111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912989487916:android:aa147bf5bcb52f5eb36289",
+        "android_client_info": {
+          "package_name": "com.example.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912989487916-0r38aptgsv8aq04jui9gpmuvr8t0icbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJKLA-L4j0OaOJraaF5WTj8DVRpfh9haY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912989487916-0r38aptgsv8aq04jui9gpmuvr8t0icbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

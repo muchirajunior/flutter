@@ -20,12 +20,19 @@ class _HomeState extends State<Home> {
 
   createtodo(){
     DocumentReference documentReference= FirebaseFirestore.instance.collection("Todos").doc(task);
+    
 
     Map<String,dynamic> todos={
       "title":task
     };
 
     documentReference.set(todos).whenComplete(() => print("added task"));
+  }
+
+  deletetodo(var mytodo){
+    DocumentReference documentReference=FirebaseFirestore.instance.collection("Todos").doc(mytodo);
+
+    documentReference.delete().whenComplete(() => print("deleted"));
   }
   
  
@@ -52,7 +59,7 @@ class _HomeState extends State<Home> {
                 title: Text(documentSnapshot["title"]),
                 trailing: IconButton(
                   onPressed: (){
-                    createtodo();                
+                   deletetodo(documentSnapshot.id);             
                   },
                   icon: Icon(Icons.delete),
                   color: Colors.amber,
@@ -64,10 +71,17 @@ class _HomeState extends State<Home> {
 
           }
           else if(snapshot.hasError){
-             return Center(child:Text("Error Loading data!!!!"));
+             return Center(child:Column(
+               children: [
+                 Icon(Icons.warning,size: 40,),
+                 SizedBox(height:20),
+                 Text("Error Loading data!!!!"),
+               ],
+             ));
           }
+         
           else{
-            return Center(child:Text("Loading data...."));
+            return Center(child: CircularProgressIndicator() );
           }
           
          

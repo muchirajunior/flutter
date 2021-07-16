@@ -1,6 +1,24 @@
+import 'package:bookclub/services/currentuser.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Register extends StatelessWidget {
+  TextEditingController name=TextEditingController();
+  TextEditingController email=TextEditingController();
+  TextEditingController password=TextEditingController();
+  TextEditingController confirm_password=TextEditingController();
+
+  void register(var email, var password, BuildContext context) async{
+    CurrentUser user= Provider.of<CurrentUser>(context, listen: false);
+
+    try {
+      if (await user.signUp(email, password))
+          Navigator.pop(context);
+    } catch (e) {
+      print(e.toString());
+    } 
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +29,7 @@ class Register extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: ListView(
-              padding: EdgeInsets.all(40),
+              padding: EdgeInsets.all(20),
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.all(50),
@@ -31,6 +49,8 @@ class Register extends StatelessWidget {
                         Text("Register "),
                         SizedBox(height:20),
                          TextField(
+                           controller: name,
+                           autofocus: true,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -42,6 +62,8 @@ class Register extends StatelessWidget {
                         ),
                         SizedBox(height:20),
                         TextField(
+                          controller: email,
+                          autofocus: true,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -53,6 +75,8 @@ class Register extends StatelessWidget {
                         ),
                         SizedBox(height:20),
                          TextField(
+                           controller: password,
+                           autofocus: true,
                            obscureText: true,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -65,7 +89,9 @@ class Register extends StatelessWidget {
                         ),
                       
                          TextField(
+                           controller: confirm_password,
                            obscureText: true,
+                           autofocus: true,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -81,7 +107,20 @@ class Register extends StatelessWidget {
                             height: 40,
                             child: RaisedButton(
                               color:Colors.green,
-                              onPressed: (){},
+                              onPressed: (){
+                                 print("${name.text},${email.text},${password.text},${confirm_password.text}");
+                                if (password.text==confirm_password.text){
+                                  register(email.text, password.text, context);
+                                 
+                                }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:Text("password do not match confirmed password"),
+                                      duration: Duration(seconds: 3),
+                                      )
+                                  );
+                                }
+                              },
                               shape: RoundedRectangleBorder(borderRadius:new BorderRadius.circular(30.0)),
                               child: Text("register"),
                             ),
@@ -92,9 +131,9 @@ class Register extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("already have an account"),
+                            Text("have an account"),
                             FlatButton(
-                              onPressed: (){Navigator.pushReplacementNamed(context, "/login");},
+                              onPressed: (){Navigator.pop(context);},
                              child: Text("login")
                             )
                           ],
@@ -105,9 +144,11 @@ class Register extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("register with google account"),
+                            Text("register with google"),
                             FlatButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                CurrentUser().signInAnon();
+                              },
                              child: Image.asset(
                                "assets/google_logo.png",
                                scale: 20,

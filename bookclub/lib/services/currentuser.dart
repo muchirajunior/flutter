@@ -2,8 +2,8 @@ import "package:firebase_auth/firebase_auth.dart";
 import 'package:flutter/cupertino.dart';
 
 class CurrentUser extends ChangeNotifier{
-  var _uid;
-  var _email;
+  var uid;
+  var email;
 
   FirebaseAuth _auth=FirebaseAuth.instance;
 
@@ -25,5 +25,17 @@ class CurrentUser extends ChangeNotifier{
 
   Future<bool> logIn() async{
      return false;
+  }
+
+  //anonymaous signin
+   signInAnon() async{
+    try{
+       UserCredential result= await _auth.signInAnonymously();      
+       print(result.user);
+    }
+    catch(e){
+        print(e.toString());
+    }
+   
   }
 }

@@ -5,7 +5,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text(" bookclub"),
+        title:Text(" HOME"),
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: ListView(

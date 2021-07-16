@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,11 +18,14 @@ class Login extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: ListView(
-              padding: EdgeInsets.all(50),
+              padding: EdgeInsets.all(20),
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.all(50),
-                  child: Image.asset("assets/logo.png"),
+                  padding: EdgeInsets.all(40),
+                  child: GestureDetector(
+                    onTap: ()=>Navigator.pushReplacementNamed(context, "/"),
+                    child: Image.asset("assets/logo.png")),
+
                   ),
 
                   Container(
@@ -69,9 +79,9 @@ class Login extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("dont have account"),
+                            Text("have no account"),
                             FlatButton(
-                              onPressed: (){ Navigator.pushReplacementNamed(context, "/register");},
+                              onPressed: (){ Navigator.pushNamed(context, "/register");},
                              child: Text("register")
                             )
                           ],
@@ -82,9 +92,12 @@ class Login extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("login with google account"),
+                            Text("login with google "),
                             FlatButton(
-                              onPressed: (){},
+                              onPressed: (){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                               SnackBar(content: Text("please wait !!!!!!!!!"),));
+                              },
                              child: Image.asset(
                                "assets/google_logo.png",
                                scale: 20,

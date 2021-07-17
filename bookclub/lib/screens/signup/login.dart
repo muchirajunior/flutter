@@ -1,4 +1,6 @@
+import 'package:bookclub/services/currentuser.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   
@@ -7,6 +9,32 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  TextEditingController email=TextEditingController();
+  TextEditingController password=TextEditingController();
+
+
+  snackbar(BuildContext context,String message){
+     return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message),)
+    );
+  }
+
+  void login( var email, var password, BuildContext context) async{
+    CurrentUser currentuser=Provider.of<CurrentUser>(context, listen:false );
+    
+    try {
+      String result=await currentuser.logIn(email, password);
+      if (result=="success"){
+        Navigator.pushReplacementNamed(context, "/");
+      }
+      else{
+        snackbar(context, result);
+      }
+      
+    } catch (e) {
+    }
+  }
    
   @override
   Widget build(BuildContext context) {
@@ -41,6 +69,7 @@ class _LoginState extends State<Login> {
                         Text("LOGIN "),
                         SizedBox(height:20),
                         TextField(
+                          controller: email,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -52,6 +81,7 @@ class _LoginState extends State<Login> {
                         ),
                         SizedBox(height:20),
                          TextField(
+                           controller: password,
                            obscureText: true,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -68,7 +98,10 @@ class _LoginState extends State<Login> {
                             height: 40,
                             child: RaisedButton(
                               color:Colors.green,
-                              onPressed: (){},
+                              onPressed: (){
+                                
+                                login(email.text,password.text,context);
+                              },
                               shape: RoundedRectangleBorder(borderRadius:new BorderRadius.circular(30.0)),
                               child: Text("login"),
                             ),
@@ -94,10 +127,7 @@ class _LoginState extends State<Login> {
                           children: [
                             Text("login with google "),
                             FlatButton(
-                              onPressed: (){
-                                ScaffoldMessenger.of(context).showSnackBar(
-                               SnackBar(content: Text("please wait !!!!!!!!!"),));
-                              },
+                              onPressed: (){snackbar(context, "login with google account not availbe"); },
                              child: Image.asset(
                                "assets/google_logo.png",
                                scale: 20,

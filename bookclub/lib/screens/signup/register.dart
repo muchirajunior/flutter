@@ -2,18 +2,37 @@ import 'package:bookclub/services/currentuser.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+
   TextEditingController name=TextEditingController();
   TextEditingController email=TextEditingController();
   TextEditingController password=TextEditingController();
   TextEditingController confirm_password=TextEditingController();
 
+  snackbar(BuildContext context, String message){
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message),)
+    );
+  }
+  
   void register(var email, var password, BuildContext context) async{
     CurrentUser user= Provider.of<CurrentUser>(context, listen: false);
 
     try {
-      if (await user.signUp(email, password))
-          Navigator.pop(context);
+      String result=await user.signUp(email, password);
+      if (result=="success"){
+         Navigator.pop(context);
+      }
+      else{
+        //show the erro
+      }
+          
+      
     } catch (e) {
       print(e.toString());
     } 
@@ -50,7 +69,7 @@ class Register extends StatelessWidget {
                         SizedBox(height:20),
                          TextField(
                            controller: name,
-                           autofocus: true,
+                          
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -63,7 +82,7 @@ class Register extends StatelessWidget {
                         SizedBox(height:20),
                         TextField(
                           controller: email,
-                          autofocus: true,
+                        
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -76,7 +95,7 @@ class Register extends StatelessWidget {
                         SizedBox(height:20),
                          TextField(
                            controller: password,
-                           autofocus: true,
+                          
                            obscureText: true,
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -91,7 +110,7 @@ class Register extends StatelessWidget {
                          TextField(
                            controller: confirm_password,
                            obscureText: true,
-                           autofocus: true,
+                          
                            decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: const BorderRadius.all(
@@ -146,9 +165,7 @@ class Register extends StatelessWidget {
                           children: [
                             Text("register with google"),
                             FlatButton(
-                              onPressed: (){
-                                CurrentUser().signInAnon();
-                              },
+                              onPressed: (){ },
                              child: Image.asset(
                                "assets/google_logo.png",
                                scale: 20,

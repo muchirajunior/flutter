@@ -11,7 +11,7 @@ class CurrentUser extends ChangeNotifier{
 
   Future<String> signUp(String email, String password) async{
      try {
-       UserCredential result=await _auth.createUserWithEmailAndPassword(email: email, password: password, );
+       UserCredential result=await _auth.createUserWithEmailAndPassword(email: email, password: password );
 
        if (result.user != null){
          print(result.user);
@@ -27,15 +27,25 @@ class CurrentUser extends ChangeNotifier{
 
   }
 
-  Future<String> googleSignUp() async{
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: [
-    'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-   );
+  googleSignOut() async{
+    await GoogleSignIn().signOut();
+  }
 
-    return "";
+  Future<String> googleSignUp() async{
+    try {
+        
+       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        final GoogleSignInAuthentication auth = await googleUser!.authentication;
+      
+        final credential= GoogleAuthProvider.credential(idToken: auth.idToken,accessToken: auth.accessToken);
+        await _auth.signInWithCredential(credential);
+        
+        return "success";
+
+    } catch (e) {
+       print(e.toString());
+      return e.toString();
+    }
   } 
 
   Future<String> logIn(var email,var password) async{

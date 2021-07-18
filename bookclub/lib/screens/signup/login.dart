@@ -13,7 +13,6 @@ class _LoginState extends State<Login> {
   TextEditingController email=TextEditingController();
   TextEditingController password=TextEditingController();
 
-
   snackbar(BuildContext context,String message){
      return ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message),)
@@ -34,6 +33,17 @@ class _LoginState extends State<Login> {
       
     } catch (e) {
     }
+  }
+
+  googleSignIn() async{
+     CurrentUser user= Provider.of<CurrentUser>(context, listen: false);
+     
+     String result=await user.googleSignUp();
+     if (result=="success"){
+       Navigator.pushReplacementNamed(context, "/");
+     }else{
+       snackbar(context, result);
+     }
   }
    
   @override
@@ -114,7 +124,9 @@ class _LoginState extends State<Login> {
                           children: [
                             Text("have no account"),
                             FlatButton(
-                              onPressed: (){ Navigator.pushNamed(context, "/register");},
+                              onPressed: (){ 
+                                CurrentUser().googleSignOut();
+                                Navigator.pushNamed(context, "/register");},
                              child: Text("register")
                             )
                           ],
@@ -122,20 +134,24 @@ class _LoginState extends State<Login> {
 
                          SizedBox(height:20),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("login with google "),
-                            FlatButton(
-                              onPressed: (){snackbar(context, "login with google account not availbe"); },
-                             child: Image.asset(
-                               "assets/google_logo.png",
-                               scale: 20,
-                               
-                               )
-                            )
-                          ],
-                        ),
+
+                         Row(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             OutlineButton(
+                               onPressed: (){ googleSignIn(); },
+                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                               child: Row(
+                                 children: [
+                                   Image.asset(
+                                   "assets/google_logo.png",
+                                   scale: 20,),
+                                   Text(" loginin with Google")
+                                 ],
+                               ),
+                               ),
+                           ],
+                         )
                         
                       ],
                     ),

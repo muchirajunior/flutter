@@ -26,16 +26,25 @@ class _RegisterState extends State<Register> {
     try {
       String result=await user.signUp(email, password);
       if (result=="success"){
-         Navigator.pop(context);
+         Navigator.pushReplacementNamed(context, "/");
       }
       else{
-        //show the erro
-      }
-          
-      
+        snackbar(context, result);
+      }           
     } catch (e) {
       print(e.toString());
     } 
+  }
+
+  googleSignIn() async{
+     CurrentUser user= Provider.of<CurrentUser>(context, listen: false);
+     
+     String result=await user.googleSignUp();
+     if (result=="success"){
+       Navigator.pop(context);
+     }else{
+       snackbar(context, result);
+     }
   }
 
   @override
@@ -158,21 +167,27 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
 
-                         SizedBox(height:20),
+                       SizedBox(height:20),
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("register with google"),
-                            FlatButton(
-                              onPressed: (){ },
-                             child: Image.asset(
-                               "assets/google_logo.png",
-                               scale: 20,
-                               
-                               )
-                            )
-                          ],
+                         children: [
+                           OutlineButton(
+                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                             onPressed: (){
+                               googleSignIn();
+                             },
+                             child: Row(
+                               children: [
+                                 Image.asset(
+                                   "assets/google_logo.png",
+                                   scale: 20,
+                                 ),
+                                 Text(" SignUp with Google")
+                               ],
+                             ),
+                             )
+                         ],
                         ),
                         
                       ],

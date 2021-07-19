@@ -2,6 +2,7 @@ import 'package:bookclub/screens/home.dart';
 import 'package:bookclub/screens/signup/login.dart';
 import 'package:bookclub/screens/signup/register.dart';
 import 'package:bookclub/services/currentuser.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ Future main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  FirebaseAuth auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -24,12 +26,13 @@ class MyApp extends StatelessWidget {
           canvasColor: Colors.teal[50],
           primarySwatch: Colors.blue,
         ),
-        initialRoute: '/login',
-        routes: {
-          '/': (context) => Home(),
-          '/login': (context) => Login(),
-          '/register': (context) => Register(),
-        },
+       initialRoute: auth.currentUser != null ? '/' : '/login',
+       routes:{
+         '/':(context)=>Home(),
+         '/login':(context)=>Login(),
+         '/register':(context)=>Register()
+       }
+
       ),
     );
   }

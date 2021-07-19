@@ -125,7 +125,7 @@ class _LoginState extends State<Login> {
                             Text("have no account"),
                             FlatButton(
                               onPressed: (){ 
-                                CurrentUser().googleSignOut();
+                                CurrentUser().signOut();
                                 Navigator.pushNamed(context, "/register");},
                              child: Text("register")
                             )

@@ -17,19 +17,32 @@ class Home extends StatelessWidget {
             height:180,
             width:200
             ),
+            SizedBox(height:100),
 
-            SizedBox(height:200),
+            Text("WELCOME TO BOOK CLUB SOCIETY WHERE WE READ AND REVIEW BOOKS "),
+
+            SizedBox(height:100),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
-                  width: 140,
+                  width: 100,
                   height: 40,
                   child: RaisedButton(
                     color:Colors.green,
                     onPressed: (){Navigator.pushReplacementNamed(context, "/login");},
                     shape: RoundedRectangleBorder(borderRadius:new BorderRadius.circular(30.0)),
-                    child: Text("Get Started"),
+                    child: Text("Create Group"),
+                  ),
+                ),
+                 SizedBox(
+                  width: 100,
+                  height: 40,
+                  child: RaisedButton(
+                    color:Colors.green,
+                    onPressed: (){Navigator.pushReplacementNamed(context, "/login");},
+                    shape: RoundedRectangleBorder(borderRadius:new BorderRadius.circular(30.0)),
+                    child: Text("Join Group"),
                   ),
                 ),
               ],

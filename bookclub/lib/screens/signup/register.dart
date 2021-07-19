@@ -20,11 +20,11 @@ class _RegisterState extends State<Register> {
     );
   }
   
-  void register(var email, var password, BuildContext context) async{
+  void register(var name,var email, var password, BuildContext context) async{
     CurrentUser user= Provider.of<CurrentUser>(context, listen: false);
 
     try {
-      String result=await user.signUp(email, password);
+      String result=await user.signUp(name,email, password);
       if (result=="success"){
          Navigator.pushReplacementNamed(context, "/");
       }
@@ -138,7 +138,7 @@ class _RegisterState extends State<Register> {
                               onPressed: (){
                                  print("${name.text},${email.text},${password.text},${confirm_password.text}");
                                 if (password.text==confirm_password.text){
-                                  register(email.text, password.text, context);
+                                  register(name.text,email.text, password.text, context);
                                  
                                 }else{
                                   ScaffoldMessenger.of(context).showSnackBar(

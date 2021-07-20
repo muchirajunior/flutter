@@ -1,4 +1,5 @@
 import 'package:bookclub/screens/home.dart';
+import 'package:bookclub/screens/record.dart';
 import 'package:bookclub/screens/signup/login.dart';
 import 'package:bookclub/screens/signup/register.dart';
 import 'package:bookclub/services/currentuser.dart';
@@ -24,13 +25,14 @@ class MyApp extends StatelessWidget {
         title: 'Book club',
         theme: ThemeData(
           canvasColor: Colors.teal[50],
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
         ),
        initialRoute: auth.currentUser != null ? '/' : '/login',
        routes:{
          '/':(context)=>Home(),
          '/login':(context)=>Login(),
-         '/register':(context)=>Register()
+         '/register':(context)=>Register(),
+         '/record':(context)=>Record()
        }
 
       ),

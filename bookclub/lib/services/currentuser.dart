@@ -48,8 +48,8 @@ class CurrentUser extends ChangeNotifier{
        final GoogleSignInAuthentication auth = await googleUser!.authentication;
        ouruser.name=googleUser.displayName;
        ouruser.email=googleUser.email;
-       ouruser.uid=googleUser.id;
        final credential= GoogleAuthProvider.credential(idToken: auth.idToken,accessToken: auth.accessToken);
+       ouruser.uid=googleUser.id;
        await _auth.signInWithCredential(credential);
        await Database().createuser(ouruser);       
         

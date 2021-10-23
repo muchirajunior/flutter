@@ -19,7 +19,7 @@ class SearchBars extends StatelessWidget {
            end: Alignment.bottomCenter,
            colors: [ 
              Colors.grey.shade800,
-             Colors.grey
+             Colors.grey.shade600
             ]
          )
        ),
@@ -92,7 +92,7 @@ class SearchBars extends StatelessWidget {
                ],
              ),
 
-            SizedBox(height: 20,),
+             SizedBox(height: 20,),
              Container(
                padding: EdgeInsets.all(10),
                decoration: BoxDecoration(
@@ -104,6 +104,23 @@ class SearchBars extends StatelessWidget {
                    hintText: "   Type keyword ...",
                    prefixIcon: Icon(Icons.search),
                    suffixIcon: Icon(Icons.more_vert),
+                   border: InputBorder.none
+                 ),
+               ),
+             ),
+
+            SizedBox(height: 20,),
+             Container(
+               padding: EdgeInsets.all(10),
+               decoration: BoxDecoration(
+                 color: Colors.white,
+                 borderRadius: BorderRadius.circular(10)
+               ),
+               child: TextField(
+                 decoration: InputDecoration(
+                   hintText: "   Type keyword ...",
+                   prefixIcon: Icon(Icons.search),
+                   suffixIcon: Icon(Icons.mic),
                    suffix: Container(width: 2, height:20, color:Colors.grey),
                    border: InputBorder.none
                  ),

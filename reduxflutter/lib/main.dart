@@ -4,6 +4,7 @@ import 'package:reduxflutter/homepage.dart';
 import 'package:reduxflutter/redux/store.dart';
 
 void main() {
+
   runApp(MyApp());
 }
 
@@ -11,15 +12,16 @@ class MyApp extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-       
-        primarySwatch: Colors.amber,
-      ),
-      home: StoreProvider(
+    return StoreProvider<dynamic>(
         store: store,
-        child: HomePage()),
-    );
+        child:MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+          
+            primarySwatch: Colors.amber,
+          ),
+          home:  HomePage(),
+        )
+      );
   }
 }

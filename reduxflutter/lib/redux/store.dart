@@ -1,4 +1,5 @@
 import 'package:redux/redux.dart';
-import 'reducer.dart';
+import 'package:reduxflutter/redux/reducer.dart';
 
-final store=Store(reducer, initialState: 0);
+
+final store=Store<dynamic>(reducer, initialState: 0);

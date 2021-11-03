@@ -3,10 +3,10 @@ enum Actions{
   Decrement
 }
 
-increment(state){
+increment(var state){
    return state++;
 }
 
-decrement(state){
+decrement(var state){
   return state--;
 }

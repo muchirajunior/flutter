@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({ Key? key }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +10,11 @@ class HomePage extends StatelessWidget {
         title: Text('flutter redux'),
       ),
 
-      body: Center(
-        child: Text("0", style: TextStyle(fontSize: 20),),
+      body: new Center(
+        child: new StoreConnector(
+          converter: (store)=>store.state,
+          builder: (context, counter)=>Text(counter.toString(), style: TextStyle(fontSize: 20),)
+          ),
         ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

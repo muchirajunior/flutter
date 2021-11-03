@@ -1,6 +1,6 @@
 import 'actions.dart';
 
-reducer(state, action){
+reducer(var state,dynamic action){
   if (action==Actions.Increment)
       increment(state);
   else if (action==Actions.Decrement)

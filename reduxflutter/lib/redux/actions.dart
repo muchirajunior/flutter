@@ -1,12 +1,16 @@
-enum Actions{
+enum MyActions{
   Increment,
   Decrement
 }
 
+
 increment(var state){
-   return state++;
+  print(state);
+    return state+1;
 }
 
 decrement(var state){
-  return state--;
+  print('state : $state');
+  return state-1;
 }
+

@@ -1,8 +1,11 @@
-import 'actions.dart';
+import 'package:reduxflutter/redux/actions.dart';
 
 reducer(var state,dynamic action){
-  if (action==Actions.Increment)
-      increment(state);
-  else if (action==Actions.Decrement)
-      decrement(state);
+  if (action==MyActions.Increment)
+     return increment(state);
+  else if (action==MyActions.Decrement)
+   return decrement(state);
+
+  else
+    return state;
 }

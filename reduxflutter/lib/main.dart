@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:reduxflutter/homepage.dart';
+import 'package:reduxflutter/redux/store.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +17,9 @@ class MyApp extends StatelessWidget {
        
         primarySwatch: Colors.amber,
       ),
-      home: HomePage(),
+      home: StoreProvider(
+        store: store,
+        child: HomePage()),
     );
   }
 }

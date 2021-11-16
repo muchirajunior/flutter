@@ -10,12 +10,17 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text("flutter bloc")
+        title:const Text("flutter bloc"),
+        actions: [
+          CircleAvatar(
+            child: BlocBuilder<CounterCubit, Map>(builder: (context, counter)=>Text(counter['items'].length.toString()),),
+          ),
+        ],
       ),
 
     
     body:  Center(
-      child: BlocBuilder<CounterCubit, int>(builder: (context, count)=>Text(count.toString()),) ,
+      child: BlocBuilder<CounterCubit, Map>(builder: (context, count)=>Text(count['count'].toString()),) ,
     ),
 
 

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        create: (_) => CounterBloc(),
+        create: (_) => CounterCubit(),
         child: Home()
         
       ),

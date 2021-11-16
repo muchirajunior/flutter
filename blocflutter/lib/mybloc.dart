@@ -1,29 +1,12 @@
 import 'package:bloc/bloc.dart';
 
-enum Events {Increment, Decrement}
+enum Events {increment, decrement}
 
-class CounterBloc extends Bloc<Events, int>{
-  
-  @override
-  Map get initState => {};
 
-  CounterBloc() : super(0);
 
-  @override
-  Stream<int>  mapEventToState(Events event) async*{
+class CounterCubit extends Cubit<int> {
+  CounterCubit() : super(0);
 
-    switch (event) {
-      case  Events.Increment:
-          yield state+1;
-          break;
-
-      case Events.Decrement:
-          yield state-1;
-          break;
-          
-      default:
-         yield state;
-    }
-  }
-   
+  void increment() => emit(state + 1);
+  void decrement() => emit(state - 1);
 }

@@ -1,5 +1,7 @@
 import 'package:blocflutter/home.dart';
+import 'package:blocflutter/mybloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,11 @@ class MyApp extends StatelessWidget {
        
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: BlocProvider(
+        create: (_) => CounterBloc(),
+        child: Home()
+        
+      ),
     );
   }
 }

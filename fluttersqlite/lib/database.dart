@@ -61,6 +61,11 @@ class DatabaseHelper{
    await  db.insert('todos', td.toMap());
   }
 
+  updateTodo(Todo td) async{
+    Database db= await instance.database;
+    await db.update('todos', td.toMap(), where: "id=${td.id}");
+  }
+
   deleteTodo(int id)async{
      Database db= await instance.database;
      await db.delete('todos',where:'id=$id');

@@ -17,22 +17,17 @@ class _HomeState extends State<Home> {
   GlobalKey key2=GlobalKey();
   GlobalKey key3=GlobalKey();
 
-loadData()async{
-     await context.read<CountData>().addData();
-  }
-
   @override
   void initState() {
     super.initState();
-    loadData();
-    WidgetsBinding.instance!.addPostFrameCallback((_)=>
-       ShowCaseWidget.of(context)!.startShowCase( [key1, key2, key3] )
+    WidgetsBinding.instance!.addPostFrameCallback((_)async{
+      ShowCaseWidget.of(context)!.startShowCase( [key1, key2, key3] );
+      await context.read<CountData>().addData();
+    }
+       
      );
-
-
-
   }
-  
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +47,16 @@ loadData()async{
           ],
           ), 
 
-          body: BlocBuilder<CountData, Map>(builder: (context, data){
+          body:   BlocBuilder<CountData, Map>(builder: (context, data){
             if (data['data'].length>0){
              return  RefreshIndicator(
-               onRefresh:loadData(),
+               onRefresh: context.read<CountData>().addData,
                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                   itemCount: data['data'].length,
                   itemBuilder: (context,index)=>Card(
                     child: ListTile(
+                      leading: Text((index+1).toString()),
                       title: const Text("radom Number"),
                       trailing: CircleAvatar(child: Text( data['data'][index].toString() ),),
                     ),
@@ -72,7 +69,8 @@ loadData()async{
              },) , 
 
           floatingActionButton: FloatingActionButton(
-            onPressed: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context) => SamplePage()  )),
+            onPressed: ()=> 
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SamplePage()  )),
             child:  Showcase(
               key: key3,
               description: "tap to move to next page",

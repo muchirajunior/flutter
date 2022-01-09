@@ -33,7 +33,7 @@ class _PanelState extends State<Panel> {
               top: Radius.circular(20)
             )
           ),
-          child:const  Center(child: Text('the collapsed view'),),
+          child:const  Center(child: Text('the panel header'),),
         ),
         collapsed: Container(
           decoration: const BoxDecoration(

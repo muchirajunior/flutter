@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomTextEdit extends StatelessWidget {
-  String? text;
+  final String? text;
   CustomTextEdit({Key? key, this.text}) : super(key: key);
-  TextEditingController _controller=TextEditingController();
+
+  final TextEditingController _controller=TextEditingController();
 
   @override
   Widget build(BuildContext context) {

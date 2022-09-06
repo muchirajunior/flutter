@@ -59,12 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             const SizedBox(height: 30,),
-            _counter.isEven ? CustomTextEdit(text: "enter dummy text 1") : CustomTextEdit(text:"enter dummy text 2")
+            _counter.isEven ?
+             CustomTextEdit(text: "enter dummy text 1") : CustomTextEdit(text:"enter dummy text 2")
           ],
         ),
       ),
 
-      
+
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',

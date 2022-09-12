@@ -94,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            _counter==0 ? Text("first") :
           FloatingActionButton(
           onPressed: decrementCounter,
           tooltip: 'Increment',

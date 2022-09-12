@@ -39,6 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  var controller1=TextEditingController();
+  var controller2=TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 30,),
             _counter.isEven ?
-             CustomTextEdit(text: "enter dummy text 1") : CustomTextEdit(text:"enter dummy text 2")
+             CustomTextEdit(text: "enter dummy text 1",controller:controller1 ,) : CustomTextEdit(text:"enter dummy text 2",controller: controller2,)
           ],
         ),
       ),

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class CustomTextEdit extends StatelessWidget {
   final String? text;
   final TextEditingController? controller;
-  CustomTextEdit({Key? key, this.text, this.controller}) : super(key: key);
+  CustomTextEdit({Key? key, this.text,this.controller}) : super(key: key);
+  final  _controller=TextEditingController();
 
   
 
@@ -12,7 +13,7 @@ class CustomTextEdit extends StatelessWidget {
     return Padding(
     padding: const EdgeInsets.all(20.0),
     child: TextField(
-      controller: controller,
+      controller: _controller,
       onChanged: (text)=>print(text),
       decoration: InputDecoration(
         hintText: text

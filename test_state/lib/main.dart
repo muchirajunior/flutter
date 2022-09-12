@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:test_state/textedit.dart';
 
@@ -30,51 +32,82 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {     
-      _counter++;
+    if (_counter > 4) _counter = 0;
+    _counter++;
+    setState(() {
+      
     });
+    tabController.animateTo(_counter);
   }
 
-  var controller1=TextEditingController();
-  var controller2=TextEditingController();
+  decrementCounter(){
+    _counter--;
+    setState(() {});
+    tabController.animateTo(_counter);
 
+  }
+
+  var controller1 = TextEditingController();
+  var controller2 = TextEditingController();
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 5, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       
-        title: Text(widget.title),
+        title: Text(widget.title)
       ),
-      body: Center(
-        child: Column(
-         
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            const SizedBox(height: 30,),
-            _counter.isEven ?
-             CustomTextEdit(text: "enter dummy text 1",controller:controller1 ,) : CustomTextEdit(text:"enter dummy text 2",controller: controller2,)
+
+      body: TabBarView(
+        controller: tabController,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text(
+            'You have pushed the button this many times:',
+          ),
+          Text(
+            '$_counter',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          // _counter.isEven ?
+          CustomTextEdit(
+            text: "enter dummy text 1",
+          ),
+          CustomTextEdit(text: "enter dummy text 2")
+        ],
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left:30.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          FloatingActionButton(
+          onPressed: decrementCounter,
+          tooltip: 'Increment',
+          child: const Icon(Icons.remove)),
+
+          _counter==4 ? Text("last ") :
+          FloatingActionButton(
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: const Icon(Icons.add)),
           ],
+        
         ),
       ),
-
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
     );
   }
 }

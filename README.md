@@ -5,3 +5,5 @@ DEVELOPING FLUTTER APPS by MUCHIRA JUNIOR
 Building Software components for mobile app development in Flutter :tada: :smiley:
 
 <img src="https://www.ukraineitnow.com/wp-content/uploads/2019/10/flutter_banner.jpg"/>
+
+To create flutter  app icon https://easyappicon.com/
